@@ -7,7 +7,7 @@
 //   exports = {};
 
 // var Long = require('long');
-import * as Long from 'long'; // What is 'long'?
+// import * as Long from 'Long'; // What is 'long'?
 
 class InputStream
 {
@@ -92,6 +92,7 @@ class InputStream
     {
 	var high = this.dataView.getInt32(this.currentPosition);
 	var low = this.dataView.getInt32(this.currentPosition + 4);
+    // @ts-ignore It works, trust me
 	var long = new Long(low, high);
 	return long.toString();
     };

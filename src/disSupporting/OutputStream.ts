@@ -1,20 +1,27 @@
-if (typeof dis === "undefined")
-   dis = {};
-   
-// Support for node.js style modules; ignore if not using node.js require
-if (typeof exports === "undefined")
-   exports = {};
 
-var Long = require('long');
+// Support for node.js style modules; ignore if not using node.js require
+//if (typeof exports === "undefined")
+//   exports = {};
+
+//var Long = require('long');
+// import * as Long from 'Long';
 
 /**
  * @param binaryDataBuffer ArrayBuffer
 */
-dis.OutputStream = function(binaryDataBuffer)
+class OutputStream
 {
-    this.binaryData = binaryDataBuffer;
-    this.dataView = new DataView(this.binaryData); // data, byte offset
-    this.currentPosition = 0;                    // ptr to current position in array
+    binaryData;
+    dataView;
+    currentPosition;
+
+    constructor(binaryDataBuffer) {
+        this.binaryData = binaryDataBuffer;
+        this.dataView = new DataView(this.binaryData); // data, byte offset
+        this.currentPosition = 0;                    // ptr to current position in array
+    }
+
+    
     
     /**
      * Returns a byte array trimmed to the maximum number of bytes written
@@ -24,68 +31,68 @@ dis.OutputStream = function(binaryDataBuffer)
      * 
      * @returns {ArrayBuffer} Only the data written
      */
-    dis.OutputStream.prototype.toByteArray = function()
+    toByteArray()
     {
         var trimmedData = this.binaryData.slice(0, this.currentPosition); 
         return trimmedData;
     };
     
     
-    dis.OutputStream.prototype.writeUByte = function(userData)
+   writeUByte(userData)
     {   
         this.dataView.setUint8(this.currentPosition, userData);
         this.currentPosition = this.currentPosition + 1;
     };
     
-    dis.OutputStream.prototype.writeByte = function(userData)
+    writeByte(userData)
     {
         this.dataView.setInt8(this.currentPosition, userData);
         this.currentPosition = this.currentPosition + 1;
     };
     
-    dis.OutputStream.prototype.writeUShort = function(userData)
+    writeUShort(userData)
     {
         this.dataView.setUint16(this.currentPosition, userData);
         this.currentPosition = this.currentPosition + 2;
     };
     
-    dis.OutputStream.prototype.writeShort = function(userData)
+    writeShort(userData)
     {
         this.dataView.setInt16(this.currentPosition, userData);
         this.currentPosition = this.currentPosition + 2;
     };
     
-    dis.OutputStream.prototype.writeUInt = function(userData)
+    writeUInt(userData)
     {
         this.dataView.setUint32(this.currentPosition, userData);
         this.currentPosition = this.currentPosition + 4;
     };
     
-    dis.OutputStream.prototype.writeInt = function(userData)
+    writeInt(userData)
     {
         this.dataView.setInt32(this.currentPosition, userData);
         this.currentPosition = this.currentPosition + 4;
     };
    
-    dis.OutputStream.prototype.writeFloat32 = function(userData)
+    writeFloat32(userData)
     {
         this.dataView.setFloat32(this.currentPosition, userData);
         this.currentPosition = this.currentPosition + 4;
     };
     
-    dis.OutputStream.prototype.writeFloat64 = function(userData)
+    writeFloat64(userData)
     {
         this.dataView.setFloat64(this.currentPosition, userData);
         this.currentPosition = this.currentPosition + 8;
     };
     
-    dis.OutputStream.prototype.writeLong = function(userData)
+    writeLong = function(userData)
     {
-	var long = new Long.fromString(userData);
+	var long = Long.fromString(userData);
 	this.dataView.setInt32(this.currentPosition, long.getHighBits());
 	this.dataView.setInt32(this.currentPosition + 4, long.getLowBits());
 	this.currentPosition = this.currentPosition + 8;
     };
 };
 
-exports.OutputStream = dis.OutputStream;
+// exports.OutputStream = dis.OutputStream;

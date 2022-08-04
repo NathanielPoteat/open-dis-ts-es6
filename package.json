@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint \"src/**/*.js\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "rm -rf dist && mkdir dist && uglifyjs src/dis/*.js src/disSupporting/*.js -o dist/dis6.min.js && uglifyjs src/dis7/*.js src/disSupporting/*.js -o dist/dis7.min.js"
+    "prepare": "mkdir dist && uglifyjs ./src/dis/*.js ./src/disSupporting/*.js -o ./dist/dis6.min.js && uglifyjs ./src/dis7/*.js ./src/disSupporting/*.js -o ./dist/dis7.min.js"
   },
   "repository": {
     "type": "git",
@@ -32,10 +32,11 @@
   },
   "homepage": "https://github.com/open-dis/open-dis-javascript",
   "dependencies": {
-    "long": "^3.2.0"
+    "long": "^3.2.0",
+    "uglifyjs": "^2.4.11"
   },
   "devDependencies": {
-    "eslint": "^6.7.1",
+    "eslint": "^6.8.0",
     "uglify-js": "^3.7.0"
   },
   "files": [
