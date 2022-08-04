@@ -6,33 +6,31 @@
  *
  * @author DMcG
  */
-// On the client side, support for a  namespace.
-if (typeof dis === "undefined")
- dis = {};
+
 
 
 // Support for node.js style modules. Ignored if used in a client context.
 // See http://howtonode.org/creating-custom-modules
-if (typeof exports === "undefined")
- exports = {};
+//if (typeof exports === "undefined")
+// exports = {};
 
 
-dis.Orientation = function()
+class Orientation
 {
-   this.psi = 0;
+   psi:number = 0;
 
-   this.theta = 0;
+   theta:number = 0;
 
-   this.phi = 0;
+   phi:number = 0;
 
-  dis.Orientation.prototype.initFromBinary = function(inputStream)
+  initFromBinary(inputStream)
   {
        this.psi = inputStream.readFloat32();
        this.theta = inputStream.readFloat32();
        this.phi = inputStream.readFloat32();
   };
 
-  dis.Orientation.prototype.encodeToBinary = function(outputStream)
+  encodeToBinary(outputStream)
   {
        outputStream.writeFloat32(this.psi);
        outputStream.writeFloat32(this.theta);
@@ -41,7 +39,8 @@ dis.Orientation = function()
 }; // end of class
 
  // node.js module support
-exports.Orientation = dis.Orientation;
+//exports.Orientation = dis.Orientation;
 
+export default Orientation;
 // End of Orientation class
 

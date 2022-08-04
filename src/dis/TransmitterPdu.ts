@@ -6,104 +6,110 @@
  *
  * @author DMcG
  */
-// On the client side, support for a  namespace.
-if (typeof dis === "undefined")
- dis = {};
 
+import BeamAntennaPattern from "./BeamAntennaPattern";
+import EntityID from "./EntityID";
+import ModulationType from "./ModulationType";
+import Pdu from "./Pdu";
+import RadioEntityType from "./RadioEntityType";
+import Vector3Double from "./Vector3Double";
+import Vector3Float from "./Vector3Float";
+// TODO: Convert and import EntityID, RadioEntityType, Vector3Double, Vector3Float, ModulationType, BeamAntennaPattern
+
+// Because of how JavaScript ES6 handles imports, a clientside namespace does not need to be created in the module
 
 // Support for node.js style modules. Ignored if used in a client context.
 // See http://howtonode.org/creating-custom-modules
-if (typeof exports === "undefined")
- exports = {};
+// if (typeof exports === "undefined")
+// exports = {};
 
 
-dis.TransmitterPdu = function()
-{
+class TransmitterPdu extends Pdu {
    /** The version of the protocol. 5=DIS-1995, 6=DIS-1998. */
-   this.protocolVersion = 6;
+   protocolVersion:number = 6;
 
    /** Exercise ID */
-   this.exerciseID = 0;
+   exerciseID:number = 0;
 
    /** Type of pdu, unique for each PDU class */
-   this.pduType = 25;
+   pduType:number = 25;
 
    /** value that refers to the protocol family, eg SimulationManagement, et */
-   this.protocolFamily = 4;
+   protocolFamily:number = 4;
 
    /** Timestamp value */
-   this.timestamp = 0;
+   timestamp:number = 0;
 
    /** Length, in bytes, of the PDU. Changed name from length to avoid use of Hibernate QL reserved word */
-   this.pduLength = 0;
+   pduLength:number = 0;
 
    /** zero-filled array of padding */
-   this.padding = 0;
+   padding:number = 0;
 
    /** ID of the entity that is the source of the communication, ie contains the radio */
-   this.entityId = new dis.EntityID(); 
+   entityId:EntityID = new EntityID(); 
 
    /** particular radio within an entity */
-   this.radioId = 0;
+   radioId:number = 0;
 
    /** linear accelleration of entity */
-   this.radioEntityType = new dis.RadioEntityType(); 
+   radioEntityType:RadioEntityType = new RadioEntityType(); 
 
    /** transmit state */
-   this.transmitState = 0;
+   transmitState:number = 0;
 
    /** input source */
-   this.inputSource = 0;
+   inputSource:number = 0;
 
    /** padding */
-   this.padding1 = 0;
+   padding1:number = 0;
 
    /** Location of antenna */
-   this.antennaLocation = new dis.Vector3Double(); 
+   antennaLocation = new Vector3Double(); 
 
    /** relative location of antenna, in entity coordinates */
-   this.relativeAntennaLocation = new dis.Vector3Float(); 
+   relativeAntennaLocation = new Vector3Float(); 
 
    /** antenna pattern type */
-   this.antennaPatternType = 0;
+   antennaPatternType:number = 0;
 
    /** atenna pattern length */
-   this.antennaPatternCount = 0;
+   antennaPatternCount:number = 0;
 
    /** frequency */
-   this.frequency = 0;
+   frequency:number = 0;
 
    /** transmit frequency Bandwidth */
-   this.transmitFrequencyBandwidth = 0;
+   transmitFrequencyBandwidth:number = 0;
 
    /** transmission power */
-   this.power = 0;
+   power:number = 0;
 
    /** modulation */
-   this.modulationType = new dis.ModulationType(); 
+   modulationType:ModulationType = new ModulationType(); 
 
    /** crypto system enumeration */
-   this.cryptoSystem = 0;
+   cryptoSystem:number = 0;
 
    /** crypto system key identifer */
-   this.cryptoKeyId = 0;
+   cryptoKeyId:number = 0;
 
    /** how many modulation parameters we have */
-   this.modulationParameterCount = 0;
+   modulationParameterCount:number = 0;
 
    /** padding2 */
-   this.padding2 = 0;
+   padding2:number = 0;
 
    /** padding3 */
-   this.padding3 = 0;
+   padding3:number = 0;
 
    /** variable length list of modulation parameters */
-    this.modulationParametersList = new Array();
+    modulationParametersList = new Array();
  
    /** variable length list of antenna pattern records */
-    this.antennaPatternList = new Array();
+    antennaPatternList = new Array();
  
-  dis.TransmitterPdu.prototype.initFromBinary = function(inputStream)
+  initFromBinary(inputStream)
   {
        this.protocolVersion = inputStream.readUByte();
        this.exerciseID = inputStream.readUByte();
@@ -133,21 +139,21 @@ dis.TransmitterPdu = function()
        this.padding3 = inputStream.readUByte();
        for(var idx = 0; idx < this.modulationParameterCount; idx++)
        {
-           var anX = new dis.ModulationType();
-           anX.initFromBinary(inputStream);
-           this.modulationParametersList.push(anX);
+           var anXa = new ModulationType();
+           anXa.initFromBinary(inputStream);
+           this.modulationParametersList.push(anXa);
        }
 
        for(var idx = 0; idx < this.antennaPatternCount; idx++)
        {
-           var anX = new dis.BeamAntennaPattern();
-           anX.initFromBinary(inputStream);
-           this.antennaPatternList.push(anX);
+           var anXb = new BeamAntennaPattern();
+           anXb.initFromBinary(inputStream);
+           this.antennaPatternList.push(anXb);
        }
 
   };
 
-  dis.TransmitterPdu.prototype.encodeToBinary = function(outputStream)
+  encodeToBinary(outputStream)
   {
        outputStream.writeUByte(this.protocolVersion);
        outputStream.writeUByte(this.exerciseID);
@@ -189,7 +195,8 @@ dis.TransmitterPdu = function()
 }; // end of class
 
  // node.js module support
-exports.TransmitterPdu = dis.TransmitterPdu;
+//exports.TransmitterPdu = dis.TransmitterPdu;
 
+export default TransmitterPdu;
 // End of TransmitterPdu class
 

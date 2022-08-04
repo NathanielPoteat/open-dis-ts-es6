@@ -6,42 +6,42 @@
  *
  * @author DMcG
  */
-// On the client side, support for a  namespace.
-if (typeof dis === "undefined")
- dis = {};
+
+import Orientation from "./Orientation";
+
 
 
 // Support for node.js style modules. Ignored if used in a client context.
 // See http://howtonode.org/creating-custom-modules
-if (typeof exports === "undefined")
- exports = {};
+//if (typeof exports === "undefined")
+// exports = {};
 
 
-dis.BeamAntennaPattern = function()
+class BeamAntennaPattern
 {
    /** The rotation that transformst he reference coordinate sytem     into the beam coordinate system. Either world coordinates or entity coordinates may be used as the     reference coordinate system, as specified by teh reference system field of the antenna pattern record. */
-   this.beamDirection = new dis.Orientation(); 
+   beamDirection = new Orientation(); 
 
-   this.azimuthBeamwidth = 0;
+   azimuthBeamwidth = 0;
 
-   this.elevationBeamwidth = 0;
+   elevationBeamwidth = 0;
 
-   this.referenceSystem = 0;
+   referenceSystem = 0;
 
-   this.padding1 = 0;
+   padding1 = 0;
 
-   this.padding2 = 0;
+   padding2 = 0;
 
    /** Magnigute of the z-component in beam coordinates at some arbitrary      single point in the mainbeam      and in the far field of the antenna. */
-   this.ez = 0;
+   ez = 0;
 
    /** Magnigute of the x-component in beam coordinates at some arbitrary      single point in the mainbeam      and in the far field of the antenna. */
-   this.ex = 0;
+   ex = 0;
 
    /** THe phase angle between Ez and Ex in radians. */
-   this.phase = 0;
+   phase = 0;
 
-  dis.BeamAntennaPattern.prototype.initFromBinary = function(inputStream)
+  initFromBinary(inputStream)
   {
        this.beamDirection.initFromBinary(inputStream);
        this.azimuthBeamwidth = inputStream.readFloat32();
@@ -54,7 +54,7 @@ dis.BeamAntennaPattern = function()
        this.phase = inputStream.readFloat32();
   };
 
-  dis.BeamAntennaPattern.prototype.encodeToBinary = function(outputStream)
+  encodeToBinary(outputStream)
   {
        this.beamDirection.encodeToBinary(outputStream);
        outputStream.writeFloat32(this.azimuthBeamwidth);
@@ -69,7 +69,8 @@ dis.BeamAntennaPattern = function()
 }; // end of class
 
  // node.js module support
-exports.BeamAntennaPattern = dis.BeamAntennaPattern;
+//exports.BeamAntennaPattern = dis.BeamAntennaPattern;
 
+export default BeamAntennaPattern;
 // End of BeamAntennaPattern class
 

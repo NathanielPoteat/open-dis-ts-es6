@@ -6,36 +6,33 @@
  *
  * @author DMcG
  */
-// On the client side, support for a  namespace.
-if (typeof dis === "undefined")
- dis = {};
 
 
 // Support for node.js style modules. Ignored if used in a client context.
 // See http://howtonode.org/creating-custom-modules
-if (typeof exports === "undefined")
- exports = {};
+//if (typeof exports === "undefined")
+// exports = {};
 
 
-dis.Vector3Float = function()
+class Vector3Float
 {
    /** X value */
-   this.x = 0;
+   x:number = 0;
 
    /** y Value */
-   this.y = 0;
+   y:number = 0;
 
    /** Z value */
-   this.z = 0;
+   z:number = 0;
 
-  dis.Vector3Float.prototype.initFromBinary = function(inputStream)
+  initFromBinary(inputStream)
   {
        this.x = inputStream.readFloat32();
        this.y = inputStream.readFloat32();
        this.z = inputStream.readFloat32();
   };
 
-  dis.Vector3Float.prototype.encodeToBinary = function(outputStream)
+  encodeToBinary(outputStream)
   {
        outputStream.writeFloat32(this.x);
        outputStream.writeFloat32(this.y);
@@ -44,7 +41,8 @@ dis.Vector3Float = function()
 }; // end of class
 
  // node.js module support
-exports.Vector3Float = dis.Vector3Float;
+//exports.Vector3Float = dis.Vector3Float;
 
+export default Vector3Float;
 // End of Vector3Float class
 

@@ -6,32 +6,29 @@
  *
  * @author DMcG
  */
-// On the client side, support for a  namespace.
-if (typeof dis === "undefined")
- dis = {};
 
 
 // Support for node.js style modules. Ignored if used in a client context.
 // See http://howtonode.org/creating-custom-modules
-if (typeof exports === "undefined")
- exports = {};
+//if (typeof exports === "undefined")
+// exports = {};
 
 
-dis.ModulationType = function()
+class ModulationType
 {
    /** spread spectrum, 16 bit boolean array */
-   this.spreadSpectrum = 0;
+   spreadSpectrum:number = 0;
 
    /** major */
-   this.major = 0;
+   major:number = 0;
 
    /** detail */
-   this.detail = 0;
+   detail:number = 0;
 
    /** system */
-   this.system = 0;
+   system:number = 0;
 
-  dis.ModulationType.prototype.initFromBinary = function(inputStream)
+  initFromBinary(inputStream)
   {
        this.spreadSpectrum = inputStream.readUShort();
        this.major = inputStream.readUShort();
@@ -39,7 +36,7 @@ dis.ModulationType = function()
        this.system = inputStream.readUShort();
   };
 
-  dis.ModulationType.prototype.encodeToBinary = function(outputStream)
+  encodeToBinary(outputStream)
   {
        outputStream.writeUShort(this.spreadSpectrum);
        outputStream.writeUShort(this.major);
@@ -49,7 +46,8 @@ dis.ModulationType = function()
 }; // end of class
 
  // node.js module support
-exports.ModulationType = dis.ModulationType;
+//exports.ModulationType = dis.ModulationType;
 
+export default ModulationType;
 // End of ModulationType class
 

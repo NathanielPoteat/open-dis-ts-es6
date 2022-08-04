@@ -6,37 +6,32 @@
  *
  * @author DMcG
  */
-// On the client side, support for a  namespace.
-if (typeof dis === "undefined")
- dis = {};
-
 
 // Support for node.js style modules. Ignored if used in a client context.
 // See http://howtonode.org/creating-custom-modules
-if (typeof exports === "undefined")
- exports = {};
+//if (typeof exports === "undefined")
+// exports = {};
 
-
-dis.RadioEntityType = function()
+class RadioEntityType
 {
    /** Kind of entity */
-   this.entityKind = 0;
+   entityKind:number = 0;
 
    /** Domain of entity (air, surface, subsurface, space, etc) */
-   this.domain = 0;
+   domain:number = 0;
 
    /** country to which the design of the entity is attributed */
-   this.country = 0;
+   country:number = 0;
 
    /** category of entity */
-   this.category = 0;
+   category:number = 0;
 
    /** specific info based on subcategory field */
-   this.nomenclatureVersion = 0;
+   nomenclatureVersion:number = 0;
 
-   this.nomenclature = 0;
+   nomenclature:number = 0;
 
-  dis.RadioEntityType.prototype.initFromBinary = function(inputStream)
+  initFromBinary(inputStream)
   {
        this.entityKind = inputStream.readUByte();
        this.domain = inputStream.readUByte();
@@ -46,7 +41,7 @@ dis.RadioEntityType = function()
        this.nomenclature = inputStream.readUShort();
   };
 
-  dis.RadioEntityType.prototype.encodeToBinary = function(outputStream)
+  encodeToBinary(outputStream)
   {
        outputStream.writeUByte(this.entityKind);
        outputStream.writeUByte(this.domain);
@@ -58,7 +53,10 @@ dis.RadioEntityType = function()
 }; // end of class
 
  // node.js module support
-exports.RadioEntityType = dis.RadioEntityType;
+//exports.RadioEntityType = dis.RadioEntityType;
+
+// ES6 module support
+export default RadioEntityType;
 
 // End of RadioEntityType class
 

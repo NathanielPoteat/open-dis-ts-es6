@@ -1,55 +1,63 @@
 //var BigInteger = require('BigInteger');
 
-if (typeof dis === "undefined")
-   dis = {};
+// Because of how JavaScript ES6 handles imports, a clientside namespace does not need to be created in the module
    
 // Support for node.js style modules; ignore if not using node.js require
-if (typeof exports === "undefined")
-   exports = {};
+// if (typeof exports === "undefined")
+//   exports = {};
 
-var Long = require('long');
+// var Long = require('long');
+import * as Long from 'long'; // What is 'long'?
 
-dis.InputStream = function(binaryData)
+class InputStream
 {
-    this.dataView = new DataView(binaryData, 0); // data, byte offset
-    this.currentPosition = 0;                    // ptr to "current" position in array
+    binaryData:ArrayBufferLike;
+
+    constructor(binaryData:ArrayBufferLike) {
+        this.binaryData = binaryData;
+    }
+
+
+    // @ts-ignore
+    dataView = new DataView(this.binaryData, 0); // data, byte offset
+    currentPosition = 0;                    // ptr to "current" position in array
     
-    dis.InputStream.prototype.readUByte = function()
+    readUByte = function()
     {
         var data = this.dataView.getUint8(this.currentPosition);
         this.currentPosition = this.currentPosition + 1;
         return data;
     };
     
-    dis.InputStream.prototype.readByte = function()
+    readByte = function()
     {
         var data = this.dataView.getInt8(this.currentPosition);
         this.currentPosition = this.currentPosition + 1;
         return data;
     };
     
-    dis.InputStream.prototype.readUShort = function()
+    readUShort = function()
     {
         var data = this.dataView.getUint16(this.currentPosition);
         this.currentPosition = this.currentPosition + 2;
         return data;
     };
     
-    dis.InputStream.prototype.readShort = function()
+    readShort = function()
     {
         var data = this.dataView.getInt16(this.currentPosition);
         this.currentPosition = this.currentPosition + 2;
         return data;
     };
     
-    dis.InputStream.prototype.readUInt = function()
+    readUInt = function()
     {
         var data = this.dataView.getUint32(this.currentPosition);
         this.currentPosition = this.currentPosition + 4;
         return data;
     };
     
-    dis.InputStream.prototype.readInt = function()
+    readInt = function()
     {
         var data = this.dataView.getInt32(this.currentPosition);
         this.currentPosition = this.currentPosition + 4;
@@ -57,7 +65,7 @@ dis.InputStream = function(binaryData)
     };
     
     /** Read a long integer. Assumes big endian format. Uses the BigInteger package. */
-    dis.InputStream.prototype.readLongInt = function()
+    readLongInt = function()
     {
         var data1 = this.dataView.getInt32(this.currentPosition);
         var data2 = this.dataView.getInt32(this.currentPosition + 4);
@@ -66,21 +74,21 @@ dis.InputStream = function(binaryData)
         
     };
    
-    dis.InputStream.prototype.readFloat32 = function()
+    readFloat32 = function()
     {
         var data = this.dataView.getFloat32(this.currentPosition);
         this.currentPosition = this.currentPosition + 4;
         return data;
     };
     
-    dis.InputStream.prototype.readFloat64 = function()
+    readFloat64 = function()
     {
         var data = this.dataView.getFloat64(this.currentPosition);
         this.currentPosition = this.currentPosition + 8;
         return data;
     };
     
-    dis.InputStream.prototype.readLong = function()
+    readLong = function()
     {
 	var high = this.dataView.getInt32(this.currentPosition);
 	var low = this.dataView.getInt32(this.currentPosition + 4);
@@ -89,4 +97,5 @@ dis.InputStream = function(binaryData)
     };
 };
 
-exports.InputStream = dis.InputStream;
+// exports.InputStream = dis.InputStream;
+export default InputStream;

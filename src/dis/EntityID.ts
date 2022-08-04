@@ -6,36 +6,36 @@
  *
  * @author DMcG
  */
-// On the client side, support for a  namespace.
-if (typeof dis === "undefined")
- dis = {};
+ 
+// Because of how JavaScript ES6 handles imports, a clientside namespace does not need to be created in the module
+
 
 
 // Support for node.js style modules. Ignored if used in a client context.
 // See http://howtonode.org/creating-custom-modules
-if (typeof exports === "undefined")
- exports = {};
+// if (typeof exports === "undefined")
+// exports = {};
 
 
-dis.EntityID = function()
+class EntityID
 {
    /** The site ID */
-   this.site = 0;
+   site:number = 0;
 
    /** The application ID */
-   this.application = 0;
+   application:number = 0;
 
    /** the entity ID */
-   this.entity = 0;
+   entity:number = 0;
 
-  dis.EntityID.prototype.initFromBinary = function(inputStream)
+  initFromBinary = function(inputStream)
   {
        this.site = inputStream.readUShort();
        this.application = inputStream.readUShort();
        this.entity = inputStream.readUShort();
   };
 
-  dis.EntityID.prototype.encodeToBinary = function(outputStream)
+  encodeToBinary = function(outputStream)
   {
        outputStream.writeUShort(this.site);
        outputStream.writeUShort(this.application);
@@ -44,7 +44,10 @@ dis.EntityID = function()
 }; // end of class
 
  // node.js module support
-exports.EntityID = dis.EntityID;
+// exports.EntityID = dis.EntityID;
+
+// ES6 module support
+export default EntityID;
 
 // End of EntityID class
 
