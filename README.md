@@ -28,6 +28,8 @@ To generate a single `dis6.min.js` and `dis7.min.js` from the source files, run 
 
 # Release
 
+*The following is currently for the original open-dis-javascript*
+
 Releases of open-dis-javascript are published to http://npmjs.com/package/open-dis
 
 1. `$ npm login`
