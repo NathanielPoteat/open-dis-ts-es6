@@ -15,7 +15,7 @@
 // exports = {};
 
 
-class Vector3Double
+export class Vector3Double
 {
    /** X value */
    x:number = 0;
@@ -44,6 +44,5 @@ class Vector3Double
  // node.js module support
 //exports.Vector3Double = dis.Vector3Double;
 
-export default Vector3Double;
 // End of Vector3Double class
 

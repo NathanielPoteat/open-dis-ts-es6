@@ -14,7 +14,7 @@
 // exports = {};
 
 
-class Vector3Float
+export class Vector3Float
 {
    /** X value */
    x:number = 0;
@@ -43,6 +43,5 @@ class Vector3Float
  // node.js module support
 //exports.Vector3Float = dis.Vector3Float;
 
-export default Vector3Float;
 // End of Vector3Float class
 

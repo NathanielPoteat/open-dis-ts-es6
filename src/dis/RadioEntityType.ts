@@ -12,7 +12,7 @@
 //if (typeof exports === "undefined")
 // exports = {};
 
-class RadioEntityType
+export class RadioEntityType
 {
    /** Kind of entity */
    entityKind:number = 0;
@@ -54,9 +54,6 @@ class RadioEntityType
 
  // node.js module support
 //exports.RadioEntityType = dis.RadioEntityType;
-
-// ES6 module support
-export default RadioEntityType;
 
 // End of RadioEntityType class
 

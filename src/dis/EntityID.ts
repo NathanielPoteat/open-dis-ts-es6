@@ -17,7 +17,7 @@
 // exports = {};
 
 
-class EntityID
+export class EntityID
 {
    /** The site ID */
    site:number = 0;
@@ -45,9 +45,6 @@ class EntityID
 
  // node.js module support
 // exports.EntityID = dis.EntityID;
-
-// ES6 module support
-export default EntityID;
 
 // End of EntityID class
 

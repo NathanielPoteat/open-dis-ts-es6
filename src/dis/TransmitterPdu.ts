@@ -7,13 +7,13 @@
  * @author DMcG
  */
 
-import BeamAntennaPattern from "./BeamAntennaPattern";
-import EntityID from "./EntityID";
-import ModulationType from "./ModulationType";
-import Pdu from "./Pdu";
-import RadioEntityType from "./RadioEntityType";
-import Vector3Double from "./Vector3Double";
-import Vector3Float from "./Vector3Float";
+import { BeamAntennaPattern } from "./BeamAntennaPattern";
+import { EntityID } from "./EntityID";
+import { ModulationType } from "./ModulationType";
+import { Pdu } from "./Pdu";
+import { RadioEntityType } from "./RadioEntityType";
+import { Vector3Double } from "./Vector3Double";
+import { Vector3Float } from "./Vector3Float";
 // TODO: Convert and import EntityID, RadioEntityType, Vector3Double, Vector3Float, ModulationType, BeamAntennaPattern
 
 // Because of how JavaScript ES6 handles imports, a clientside namespace does not need to be created in the module
@@ -24,7 +24,7 @@ import Vector3Float from "./Vector3Float";
 // exports = {};
 
 
-class TransmitterPdu extends Pdu {
+export class TransmitterPdu extends Pdu {
    /** The version of the protocol. 5=DIS-1995, 6=DIS-1998. */
    protocolVersion:number = 6;
 
@@ -197,6 +197,5 @@ class TransmitterPdu extends Pdu {
  // node.js module support
 //exports.TransmitterPdu = dis.TransmitterPdu;
 
-export default TransmitterPdu;
 // End of TransmitterPdu class
 

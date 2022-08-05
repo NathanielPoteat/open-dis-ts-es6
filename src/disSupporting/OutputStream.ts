@@ -9,7 +9,7 @@
 /**
  * @param binaryDataBuffer ArrayBuffer
 */
-class OutputStream
+export class OutputStream
 {
     binaryData;
     dataView;
@@ -88,10 +88,11 @@ class OutputStream
     
     writeLong = function(userData)
     {
-	var long = Long.fromString(userData);
-	this.dataView.setInt32(this.currentPosition, long.getHighBits());
-	this.dataView.setInt32(this.currentPosition + 4, long.getLowBits());
-	this.currentPosition = this.currentPosition + 8;
+        // @ts-ignore Long
+        var long = Long.fromString(userData);
+        this.dataView.setInt32(this.currentPosition, long.getHighBits());
+        this.dataView.setInt32(this.currentPosition + 4, long.getLowBits());
+        this.currentPosition = this.currentPosition + 8;
     };
 };
 

@@ -9,7 +9,7 @@
 // var Long = require('long');
 // import * as Long from 'Long'; // What is 'long'?
 
-class InputStream
+export class InputStream
 {
     binaryData:ArrayBufferLike;
 
@@ -99,4 +99,3 @@ class InputStream
 };
 
 // exports.InputStream = dis.InputStream;
-export default InputStream;

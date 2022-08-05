@@ -7,9 +7,9 @@
  * @author DMcG
  */
 
-import Pdu from "./Pdu";
-import EntityID from "./EntityID";
-import Chunk from "../disSupporting/Chunk";
+import { Pdu } from "./Pdu";
+import { EntityID } from "./EntityID";
+import { Chunk } from "../disSupporting/Chunk";
 // Need to convert and import EntityID() and Chunk()
 
 // Because of how JavaScript ES6 handles imports, a clientside namespace does not need to be created in the module
@@ -20,7 +20,7 @@ import Chunk from "../disSupporting/Chunk";
 // exports = {};
 
 
-class SignalPdu extends Pdu {
+export class SignalPdu extends Pdu {
   /** The version of the protocol. 5=DIS-1995, 6=DIS-1998. */
   protocolVersion = 6;
 
@@ -121,6 +121,5 @@ class SignalPdu extends Pdu {
 // node.js module support
 // exports.SignalPdu = dis.SignalPdu;
 
-export default SignalPdu;
 // End of SignalPdu class
 

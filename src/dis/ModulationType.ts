@@ -14,7 +14,7 @@
 // exports = {};
 
 
-class ModulationType
+export class ModulationType
 {
    /** spread spectrum, 16 bit boolean array */
    spreadSpectrum:number = 0;
@@ -48,6 +48,5 @@ class ModulationType
  // node.js module support
 //exports.ModulationType = dis.ModulationType;
 
-export default ModulationType;
 // End of ModulationType class
 

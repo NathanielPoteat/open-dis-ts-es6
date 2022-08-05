@@ -17,7 +17,7 @@ import Orientation from "./Orientation";
 // exports = {};
 
 
-class BeamAntennaPattern
+export class BeamAntennaPattern
 {
    /** The rotation that transformst he reference coordinate sytem     into the beam coordinate system. Either world coordinates or entity coordinates may be used as the     reference coordinate system, as specified by teh reference system field of the antenna pattern record. */
    beamDirection = new Orientation(); 
@@ -71,6 +71,5 @@ class BeamAntennaPattern
  // node.js module support
 //exports.BeamAntennaPattern = dis.BeamAntennaPattern;
 
-export default BeamAntennaPattern;
 // End of BeamAntennaPattern class
 

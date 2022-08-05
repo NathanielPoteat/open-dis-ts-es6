@@ -15,7 +15,7 @@
 //  exports = {};
 
 
-class Pdu {
+export class Pdu {
   /** The version of the protocol. 5=DIS-1995, 6=DIS-1998. */
   protocolVersion:number = 6;
 
@@ -63,7 +63,5 @@ class Pdu {
 // node.js module support
 //exports.Pdu = Pdu;
 
-// ES6 Module support
-export default Pdu;
 // End of Pdu class
 

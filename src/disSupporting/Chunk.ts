@@ -10,7 +10,7 @@
 // Replaces (n)ByteChunk functions
 // chunkSize: specify the size of the chunk, ie 1 = 1 byte chunk, 8 = 8 byte chunk, etc.
 // usage: var foo = new Chunk(4) // for a 4 byte chunk
-class Chunk
+export class Chunk
  {
 	chunkSize:number = 0;
 
@@ -34,4 +34,3 @@ class Chunk
 }
 
 // exports.Chunk = dis.Chunk
-export default Chunk;
