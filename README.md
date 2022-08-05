@@ -20,13 +20,15 @@ position in a local tanget plane coordinate system.
 
 ## Build (In Progress)
 
-*The following instructions does not currently produce a working build. To build a min file, manual copy and paste the contents of the files you need into a single file and delete all the imports*
+*The following instructions do not currently produce a working build. To build a min file, manual copy and paste the contents of the .ts files you need into a single .ts file and comment out all the imports. Until a file is converted from .ts to .js it cannot be used to create a build file*
 
 To generate a single `dis6.min.js` and `dis7.min.js` from the source files, run the following command:
 
 `$ npm install`
 
 # Release
+
+*The following is currently for the original open-dis-javascript*
 
 Releases of open-dis-javascript are published to http://npmjs.com/package/open-dis
 
