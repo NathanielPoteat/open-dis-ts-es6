@@ -10,11 +10,13 @@ This library is intended to be used client-side on a browser
 with a websocket. The websocket should send DIS data to and from
 a server.
 
+-NathanielPoteat
+
 The code also includes some simple coordinate system transforms
 to change DIS world coordinates to (lat, lon, alt) or to a
 position in a local tanget plane coordinate system. 
 
-DMcG
+-DMcG
 
 ## Build (In Progress)
 
