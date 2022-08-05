@@ -1,9 +1,6 @@
-if (typeof dis === "undefined")
-   dis = {};
-   
 // Support for node.js style modules; ignore if not using node.js require
-if (typeof exports === "undefined")
-   exports = {};
+//if (typeof exports === "undefined")
+//   exports = {};
 
 /**
  * Utility class that converts between strings and the DIS ESPDU marking
@@ -20,7 +17,7 @@ if (typeof exports === "undefined")
  * 
  * @returns {undefined}
  */
-dis.StringConversion = function()
+export const StringConversion = function()
 {
 };
 
@@ -31,9 +28,9 @@ dis.StringConversion = function()
  * 
  * @returns {array} disMarking field, 12 bytes long, character set = 1 (ascii) in 0, zero-filled to 11 character codes 
  */
-dis.StringConversion.prototype.StringToDisMarking = function(markingString)
+StringConversion.prototype.StringToDisMarking = function(markingString)
 {
-    var byteMarking = [];
+    var byteMarking:number[] = [];
     
     // character set 1 = ascii
     byteMarking.push(1);
@@ -47,12 +44,12 @@ dis.StringConversion.prototype.StringToDisMarking = function(markingString)
     // If the string is shorter than 11 bytes, we zero-fill the array
     var  diff = 11 - markingLength;
     
-    for(var idx = 0; idx < markingLength; idx++)
+    for(let idx = 0; idx < markingLength; idx++)
     {
         byteMarking.push(markingString.charCodeAt(idx));
     }
     
-    for(var idx = markingLength; idx < 11; idx++)
+    for(let idx = markingLength; idx < 11; idx++)
     {
         byteMarking.push(0);
     }
@@ -66,7 +63,7 @@ dis.StringConversion.prototype.StringToDisMarking = function(markingString)
  * @param {array} disMarking dis marking field, [0] = character set, the rest character codes
  * @returns {string} string equivalent of the marking field
  */
-dis.StringConversion.prototype.DisMarkingToString = function(disMarking)
+StringConversion.prototype.DisMarkingToString = function(disMarking)
 {
     var marking = "";
     

@@ -37,13 +37,10 @@
  * @param {float} lon longitude, in degrees, of origin
  * @param {float} alt altitude, in meters, of the origin of the local tangent plane coordinate system
  */
-
-if (typeof dis === "undefined")
- dis = {};
  
 // Support for node.js style modules; ignore if not using node.js require
-if (typeof exports === "undefined")
-   exports = {};
+//if (typeof exports === "undefined")
+//   exports = {};
  
 /** Constructor, creates an object that can do coordinate systems conversions.
  * Takes a geodetic point that is the origin of a tangent plane to the surface
@@ -57,7 +54,7 @@ if (typeof exports === "undefined")
  * @param {type} alt altitude, in meters, of the origin of the local tangent plane
  * @returns {RangeCoordinates} An object that can do coordinate system conversions
  */
-dis.RangeCoordinates = function(lat, lon, alt)
+export const RangeCoordinates = function(lat, lon, alt)
 {
     this.RADIANS_PER_DEGREE = 2 * Math.PI / 360.0;
     this.DEGREES_PER_RADIAN = 360.0 / (2* Math.PI);
@@ -92,7 +89,7 @@ dis.RangeCoordinates = function(lat, lon, alt)
      * @param {float} lambda the latitude, in radians.
      * @returns {float} distance in meters from the latitude to the axis of the earth
      */
-    dis.RangeCoordinates.prototype.N = function(lambda)
+    RangeCoordinates.prototype.N = function(lambda)
     {
         //N(lambda) = a / sqrt( 1 - e^2 * sin^2(lambda) )
         var val = this.a / Math.sqrt(1- ( Math.pow(this.e, 2) * Math.pow( Math.sin(lambda), 2) ) );
@@ -106,7 +103,7 @@ dis.RangeCoordinates = function(lat, lon, alt)
      * @param {latitude:longitude:altitude:} latLonAlt The lat/lon/alt, in degrees and meters
      * @returns {x, y, z}  rectilienar coordinates in ECEF, aka DIS coordinates
      */
-    dis.RangeCoordinates.prototype.latLonAltDegreesObjectToECEF = function(latLonAlt)
+    RangeCoordinates.prototype.latLonAltDegreesObjectToECEF = function(latLonAlt)
     {
         return this.latLonAltDegreesToECEF(latLonAlt.latitude, latLonAlt.longitude, latLonAlt.altitude);
     };
@@ -120,7 +117,7 @@ dis.RangeCoordinates = function(lat, lon, alt)
      * @param {float} altitude (in meters)
      * @returns {x, y, z} rectilienar coordinates in ECEF-r, aka DIS coordinates
      */
-    dis.RangeCoordinates.prototype.latLonAltRadiansToECEF = function(latitude, longitude, altitude)
+    RangeCoordinates.prototype.latLonAltRadiansToECEF = function(latitude, longitude, altitude)
     {
         /*
         // altitude corresponds to h in the paper, lambda to latitude, phi to longitude
@@ -153,7 +150,7 @@ dis.RangeCoordinates = function(lat, lon, alt)
      * @param {type} altitude in meters
      * @returns {x,y,z} coordinates in ECEF, in meters aka DIS global coordinates
      */
-    dis.RangeCoordinates.prototype.latLonAltDegreesToECEF = function(latitude, longitude, altitude)
+    RangeCoordinates.prototype.latLonAltDegreesToECEF = function(latitude, longitude, altitude)
     {
         return this.latLonAltRadiansToECEF(latitude * this.RADIANS_PER_DEGREE, longitude * this.RADIANS_PER_DEGREE, altitude);
     };
@@ -168,13 +165,13 @@ dis.RangeCoordinates = function(lat, lon, alt)
      * @param position {x:, y:, z:}
      * @return {latitude:, longitude: altitude:}
      */
-    dis.RangeCoordinates.prototype.ECEFObjectToLatLongAltInDegrees = function(position)
+    RangeCoordinates.prototype.ECEFObjectToLatLongAltInDegrees = function(position)
     {
         var x = position.x;
         var y = position.y;
         var z = position.z;
         
-        var answer = [];
+        var answer;
         answer[0] = 0.0;
         answer[1] = 0.0;
         answer[2] = 0.0;
@@ -239,7 +236,7 @@ dis.RangeCoordinates = function(lat, lon, alt)
     *  @param {x:y:z:} ecefPosition ecef position (in meters)
     *  @returns {x:y:z:} object with x, y, and z local coordinates, ENU 
     */
-   dis.RangeCoordinates.prototype.ECEFObjectToENU = function(ecefPosition)
+   RangeCoordinates.prototype.ECEFObjectToENU = function(ecefPosition)
    {
        return this.ECEFtoENU(ecefPosition.x, ecefPosition.y, ecefPosition.z);
    };
@@ -253,7 +250,7 @@ dis.RangeCoordinates = function(lat, lon, alt)
     *  @param {float} Z the Z coordinate
     *  @returns {x:y:z:} object with x, y, and z local coordinates, ENU 
     */
-   dis.RangeCoordinates.prototype.ECEFtoENU = function(X, Y, Z)
+   RangeCoordinates.prototype.ECEFtoENU = function(X, Y, Z)
    {
      // Origin of ENU tangent plane coordinate system in ECEF coordinate system
      var Xr = this.ENUOriginInECEF.x;
@@ -263,9 +260,9 @@ dis.RangeCoordinates = function(lat, lon, alt)
      var originLonRadians = this.ENUOrigin.longitude * this.RADIANS_PER_DEGREE;
      var originLatRadians = this.ENUOrigin.latitude * this.RADIANS_PER_DEGREE;
      
-     e = -(Math.sin(originLonRadians)) * (X-Xr) + Math.cos(originLonRadians) * (Y-Yr);
-     n = -(Math.sin(originLatRadians))  * Math.cos(originLonRadians) * (X-Xr) - Math.sin(originLatRadians) * Math.sin(originLonRadians) * (Y-Yr) + Math.cos(originLatRadians) * (Z-Zr);
-     u = Math.cos(originLatRadians) * Math.cos(originLonRadians) * (X-Xr) + Math.cos(originLatRadians) * Math.sin(originLonRadians) * (Y-Yr) + Math.sin(originLatRadians) * (Z-Zr);
+     let e = -(Math.sin(originLonRadians)) * (X-Xr) + Math.cos(originLonRadians) * (Y-Yr);
+     let n = -(Math.sin(originLatRadians))  * Math.cos(originLonRadians) * (X-Xr) - Math.sin(originLatRadians) * Math.sin(originLonRadians) * (Y-Yr) + Math.cos(originLatRadians) * (Z-Zr);
+     let u = Math.cos(originLatRadians) * Math.cos(originLonRadians) * (X-Xr) + Math.cos(originLatRadians) * Math.sin(originLonRadians) * (Y-Yr) + Math.sin(originLatRadians) * (Z-Zr);
     
      // Local coordinate system x, y, z
      return {x:e, y:n, z:u};
@@ -277,7 +274,7 @@ dis.RangeCoordinates = function(lat, lon, alt)
    * @param enuPosition {x:y:z:} local coordinate object
    * @returns {x:y:z:} point in ECEF / DIS coordinate system
    */
-   dis.RangeCoordinates.prototype.ENUObjectToECEF = function(enuPosition)
+   RangeCoordinates.prototype.ENUObjectToECEF = function(enuPosition)
    {
        return this.ENUtoECEF(enuPosition.x, enuPosition.y, enuPosition.z);
    };
@@ -290,7 +287,7 @@ dis.RangeCoordinates = function(lat, lon, alt)
    * @param localZ {float} local coordinate system Z
    * @returns {x:y:z:} point in ECEF / DIS coordinate system
    */
-   dis.RangeCoordinates.prototype.ENUtoECEF = function(localX, localY, localZ)
+   RangeCoordinates.prototype.ENUtoECEF = function(localX, localY, localZ)
    {
        // ENU local coordinate system origin, in ECEF
        var Xr = this.ENUOriginInECEF.x;
@@ -313,11 +310,11 @@ dis.RangeCoordinates = function(lat, lon, alt)
   Z = cos(refLat)*n + sin(refLat)*u + Zr;
        */
  
-       X = -(Math.sin(refLong)) * localX - Math.cos(refLong) * Math.sin(refLat) * localY + Math.cos(refLong) * Math.cos(refLat) * localZ + Xr;
-       Y = Math.cos(refLong) * localX - Math.sin(refLong) * Math.sin(refLat) * localY + Math.cos(refLat) * Math.sin(refLong) * localZ + Yr;
-       Z = Math.cos(refLat)  * localY + Math.sin(refLat) * localZ + Zr;
+       let X = -(Math.sin(refLong)) * localX - Math.cos(refLong) * Math.sin(refLat) * localY + Math.cos(refLong) * Math.cos(refLat) * localZ + Xr;
+       let Y = Math.cos(refLong) * localX - Math.sin(refLong) * Math.sin(refLat) * localY + Math.cos(refLat) * Math.sin(refLong) * localZ + Yr;
+       let Z = Math.cos(refLat)  * localY + Math.sin(refLat) * localZ + Zr;
        
        return {x:X, y:Y, z:Z};
    };
    
-exports.RangeCoordinates = dis.RangeCoordinates;
+//exports.RangeCoordinates = dis.RangeCoordinates;

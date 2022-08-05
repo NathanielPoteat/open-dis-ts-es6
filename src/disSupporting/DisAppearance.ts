@@ -49,20 +49,17 @@
  *  
  *  @author DMcG
  **/
-
-if (typeof dis === "undefined")
- dis = {};
  
 // Support for node.js style modules; ignore if not using node.js require
-if (typeof exports === "undefined")
-   exports = {};
+//if (typeof exports === "undefined")
+//   exports = {};
 
 /** Constructor. Takes the integer value extracted from the DIS Entity State Field appearance
  * 
  * @param {type} integerValue the entity appearance from the espdu
  * @returns {undefined}
  */
-dis.DisAppearance = function(integerValue)
+export const DisAppearance = function(integerValue)
 {
     this.entityAppearance = integerValue; 
 }
@@ -71,9 +68,9 @@ dis.DisAppearance = function(integerValue)
  * Test code for creating the correct bitmask
  * @returns {undefined}
  */
-dis.DisAppearance.prototype.getTestMask = function()
+DisAppearance.prototype.getTestMask = function()
 {
-    mask = 0;
+    let mask = 0;
     for(var idx = 0; idx < 7; idx++)
     {
         mask = mask + this.bit_set(mask, idx);
@@ -88,7 +85,7 @@ dis.DisAppearance.prototype.getTestMask = function()
  * @param {integer} finishPosition
  * @returns {integer}
  */
-dis.DisAppearance.prototype.getBitField = function(startPosition, finishPosition)
+DisAppearance.prototype.getBitField = function(startPosition, finishPosition)
 {
     // do some sanity checks
     if(startPosition < 0 || startPosition > 31 || finishPosition < 0 || finishPosition > 31 || startPosition > finishPosition)
@@ -118,10 +115,10 @@ dis.DisAppearance.prototype.getBitField = function(startPosition, finishPosition
  * @param {integer} bit which bit to set
  * @return {integer} the number passed in, with the "bit"th bit flipped on.
  **/
-dis.DisAppearance.prototype.bit_set = function(num, bit)
+DisAppearance.prototype.bit_set = function(num, bit)
 {
     return num | 1<<bit;
 }
 
-exports.DisAppearance = dis.DisAppearance;
+// exports.DisAppearance = dis.DisAppearance;
 

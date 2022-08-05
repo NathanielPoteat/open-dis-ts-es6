@@ -1,11 +1,8 @@
-if (typeof dis === "undefined")
-   dis = {};
- 
 // Support for node.js style modules; ignore if not using node.js require
-if (typeof exports === "undefined")
-   exports = {};
+//if (typeof exports === "undefined")
+//   exports = {};
 
-dis.CoordinateConversion = function()
+export const CoordinateConversion = function()
  {
      
     this.RADIANS_TO_DEGREES = 180.0/Math.PI;
@@ -23,12 +20,12 @@ dis.CoordinateConversion = function()
      * @param position {x:, y:, z:}
      * @return {latitude:, longitude: altitude:}
      */
-    dis.CoordinateConversion.prototype.convertDisToLatLongInDegrees = function(position)
+    CoordinateConversion.prototype.convertDisToLatLongInDegrees = function(position)
     {
         var x = position.x;
         var y = position.y;
         var z = position.z;
-        var answer = [];
+        var answer;
         answer[0] = 0.0;
         answer[1] = 0.0;
         answer[2] = 0.0;
@@ -93,7 +90,7 @@ dis.CoordinateConversion = function()
      * @param latLonAlt {lat: lon: alt:} in degrees and meters
      * @return {x: y: z:} in meters
      */
-    dis.CoordinateConversion.prototype.getXYZfromLatLonAltDegrees = function(latLonAlt)
+    CoordinateConversion.prototype.getXYZfromLatLonAltDegrees = function(latLonAlt)
     {
         var latitudeRadians = latLonAlt.lat   * this.DEGREES_TO_RADIANS;
         var longtitudeRadians = latLonAlt.lon * this.DEGREES_TO_RADIANS;
@@ -112,4 +109,4 @@ dis.CoordinateConversion = function()
     };
  };
  
- exports.CoordinateConversion = dis.CoordinateConversion;
+ // exports.CoordinateConversion = dis.CoordinateConversion;
