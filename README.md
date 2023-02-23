@@ -2,6 +2,9 @@
 
 ## Introduction
 
+I AM NO LONGER WORKING ON THIS BECAUSE THE NEEDS OF THE PROJECT I WAS WORKING ON
+HAVE BEEN SATISFIED. -NathanielPoteat
+
 A TypeScript ES6 implementation of DIS that decodes IEEE 1278.1
 binary data format messages and turns them into Javascript
 objects.
